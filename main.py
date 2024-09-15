@@ -25,7 +25,7 @@ async def getData(sheetName):
     print(resultList)
     return resultList;
 
-@app.get("/word/{sheetName}")
+@app.get("/word/{sheetName}/test1")
 async def word (sheetName):
     df = pd.read_excel('data/features.xlsx', sheet_name=sheetName)
     randomnumber = random.randrange(0, len(df.columns)+1)
