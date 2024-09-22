@@ -23,16 +23,18 @@ async def getData(sheetName):
         }
         resultList.append(result); 
     print(resultList)
-    return resultList;
+    return resultList
 
-@app.get("/word/{sheetName}/test1")
+@app.get("/word/{sheetName}/test")
 async def word (sheetName):
     df = pd.read_excel('data/features.xlsx', sheet_name=sheetName)
     randomnumber = random.randrange(0, len(df.columns)+1)
     word_db = { 
+        "wordbook": sheetName,
         "keyword": df.loc[randomnumber].keyword,
         "word_mean": df.loc[randomnumber].word_mean,
-        "englishSentence" : df.loc[randomnumber].englishSentence,
+        "englishSentence" : df.loc[randomnumber].englishSentence.replace(df.loc[randomnumber].keyword, "_______"),
         "koreanSentence": df.loc[randomnumber].koreanSentence,
     }
+
     return word_db
